@@ -1,0 +1,36 @@
+<%-include('../partials/header')%>
+
+<section id="show-page">
+    <div>Airline: </div>
+    <div><%= flight.airline %></div>
+    <div>Airport:</div>
+    <div><%= flight.airport %></div>
+    <div>Flight Number:</div>
+    <div><% flight.flightNo %></div>
+    <div>Departure:</div>
+    <div><%= flight.departs %></div>
+
+
+
+
+</section>
+
+<br><h2>Where to?</h2>
+<form id="add-destinations-form" methods="POST"
+    action="/flights/<%=flight._id%>/destionations">
+    <label>Destinations:
+        <select name="airport">
+            <option value="AUS">AUS</option>
+            <option value="DFW">DFW</option>
+            <option value="DEN">DEN</option>
+            <option value="LAX">LAX</option>
+            <option value="SAN">SAN</option>
+        </select>
+
+    </label>
+    <label>
+        <input type="datetime-local" name="arrival">
+    </label>
+    <input type="submit" value="add destination">
+
+</form>

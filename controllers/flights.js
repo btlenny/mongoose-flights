@@ -1,9 +1,10 @@
-const Flight = require('../models/flights');
+const Flight = require('../models/flight');
 
 module.exports = {
     new: newFlight,
     create,
-    index
+    index,
+    show,
   };
 
   function newFlight(req, res) {
@@ -19,10 +20,15 @@ module.exports = {
     res.redirect('/flights');
   }
 
-  //this will show all the movies in my DB
+  //this will show all the flights in my DB
   function index(req,res) {
    Flight.find({})
    .then((flights) => {
       res.render('flights/index', {flights})
    })
+  }
+
+  async function show(req, res) {
+    const flight= await Flight.findById(req.params.id);
+    res.render('flights/show', { title: 'Flight Destination', flight });
   }
