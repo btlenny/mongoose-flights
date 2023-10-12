@@ -28,7 +28,12 @@ module.exports = {
    })
   }
 
+
+
   async function show(req, res) {
     const flight= await Flight.findById(req.params.id);
+    console.log('Flight ID:', flight._id);
     res.render('flights/show', { title: 'Flight Destination', flight });
   }
+
+  

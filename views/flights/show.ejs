@@ -6,18 +6,16 @@
     <div>Airport:</div>
     <div><%= flight.airport %></div>
     <div>Flight Number:</div>
-    <div><% flight.flightNo %></div>
+    <div><%= flight.flightNo %></div>
     <div>Departure:</div>
     <div><%= flight.departs %></div>
-
-
-
-
 </section>
 
+<!-- add to ticket form below this comment -->
+
+
 <br><h2>Where to?</h2>
-<form id="add-destinations-form" methods="POST"
-    action="/flights/<%=flight._id%>/destionations">
+<form id="add-destinations-form" method="POST" action="/flights/<%= flight._id.toString() %>/destinations">
     <label>Destinations:
         <select name="airport">
             <option value="AUS">AUS</option>
@@ -26,11 +24,9 @@
             <option value="LAX">LAX</option>
             <option value="SAN">SAN</option>
         </select>
-
     </label>
     <label>
         <input type="datetime-local" name="arrival">
     </label>
     <input type="submit" value="add destination">
-
 </form>

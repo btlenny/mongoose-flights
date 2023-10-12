@@ -1,15 +1,19 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const flightsCtrl = require('../controllers/flights');
 
-/* GET users listing. */
+// Display the form to create a new flight
 router.get('/new', flightsCtrl.new);
 
+// Handle the creation of a new flight
 router.post('/', flightsCtrl.create);
-//locahost: 3000/movies
-// GET /movies/:id (show functionality) MUST be below new route
-router.get('/:id', flightsCtrl.show);
 
-router.get('/', flightsCtrl.index)
+router.get('/:id', flightsCtrl.show); 
+
+// List all flights
+router.get('/', flightsCtrl.index);
+
+
+
 
 module.exports = router;

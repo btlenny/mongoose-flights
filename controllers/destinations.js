@@ -5,15 +5,12 @@ module.exports = {
 };
 
 async function create(req, res) {
-  const flight = await Flight.findById(req.params.id);
-  // We can push (or unshift) subdocs into Mongoose arrays
-  flight.reviews.push(req.body);
   try {
-    // Save any changes made to the movie doc
-    await flight.save();
+    const flightId = req.params.id;
+    console.log('Flight ID:', flightId);
+    // ...rest of your code...
   } catch (err) {
-    console.log(err);
+    console.error(err);
+    res.status(500).send('Error adding destination');
   }
-  // Step 5:  Respond to the Request (redirect if data has been changed)
-  res.redirect(`/flights/${flight._id}`);
 }
