@@ -15,8 +15,9 @@ async function newTicket(req, res) {
   
 async function create(req, res) {
   const flight = await Flight.findById(req.params.id);
+  req.body.flight = req.params.id;
   // We can push (or unshift) subdocs into Mongoose arrays
-  flight.tickets.push(req.body);
+  Ticket.create(req.body);
   try {
     // Save any changes made to the movie doc
     await flight.save();
@@ -28,8 +29,15 @@ async function create(req, res) {
 }
 
 async function addToFlight(req, res) {
-    const flight = await Flight.findById(req.params.id);
-    flight.tickets.push(req.body.ticketId);
-    await flight.save();
-    res.redirect(`/flights/${flight._id}`)
+  const flight = await Flight.findById(req.params.id);
+  
+  // Check if the flight object has a 'tickets' array and initialize it if it doesn't exist
+  if (!flight.tickets) {
+      flight.tickets = [];
   }
+  
+  flight.tickets.push(req.body.ticketId);
+  
+  await flight.save();
+  res.redirect(`/flights/${flight._id}`);
+}
