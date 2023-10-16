@@ -1,5 +1,6 @@
 const Flight = require('../models/flight');
 
+
 module.exports = {
     new: newFlight,
     create,
@@ -13,9 +14,9 @@ module.exports = {
     res.render('flights/new', { errorMsg: '' });
   }
 
-  function create(req, res) {
+  async function create(req, res) {
     // The model is responsible for creating data
-    Flight.create(req.body);
+    await Flight.create(req.body);
     // Do a redirect anytime data is changed
     res.redirect('/flights');
   }

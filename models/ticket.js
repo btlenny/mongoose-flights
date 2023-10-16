@@ -12,4 +12,6 @@ const ticketSchema = new Schema({
         ref: 'Flight' }
   });
 
+  const Ticket = mongoose.model('Ticket', ticketSchema);
+
   module.exports = mongoose.model('Ticket', ticketSchema);

@@ -5,27 +5,18 @@ module.exports = {
 };
 
 async function create(req, res) {
+  console.log('imhere');
+  const flight = await Flight.findById(req.params.id);
+  console.log('blenny', flight)
+  flight.destinations.push(req.body);
   try {
-    const flightId = req.params.id;
-    console.log('Flight ID:', flightId);
    
+    await flight.save();
+    res.redirect(`/flights/${flight._id}`);
   } catch (err) {
-    console.error(err);
-    res.status(500).send('Error adding destination');
+    console.log(err);
   }
-  res.redirect('/flights/${flight._id}')
 }
-
-// async function create(req, res) {
-//   try {
-//     const flight = await Flight.findById(req.params.id);
-//     flight.destination.push(req.body);
-//     await flight.save();
-//     res.redirect(`/flights/${flight._id}`);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }+
 function createTicket(req, res) {
   // The model is responsible for creating data
   Flight.findById(req.params.id, (err, flight) => {

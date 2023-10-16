@@ -8,9 +8,10 @@ module.exports = {
 };
 
 async function newTicket(req, res) {
-    //Sort performers by their name
-    const tickets = await Ticket.find({}).sort('name');
-    res.render('tickets/new', { title: 'Add Ticket', tickets });
+    //search and retrieve by specific flight
+    const flight = await Flight.findById(req.param.id);
+    const flights = await Flight.find({});
+    res.render('tickets/new', {flight, flights});
   }
   
 async function create(req, res) {
